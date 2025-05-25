@@ -11,7 +11,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', Beranda::class)->middleware(['auth'])->name('home');
 Route::get('/user', User::class)->middleware(['auth'])->name('user');

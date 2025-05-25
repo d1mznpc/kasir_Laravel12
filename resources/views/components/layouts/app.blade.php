@@ -29,7 +29,9 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -43,35 +45,36 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                        @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @endif
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
 
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                        @endif
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
                         @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                 document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
                         @endguest
                     </ul>
                 </div>
@@ -82,15 +85,35 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <a href="{{route('home')}}" wire:navigate class="btn {{ request() -> routeIs('home') ? 'btn-primary' : 'btn-outline-primary'}}">Beranda</a>
-                        <a href="{{route('user')}}" wire:navigate class="btn {{ request() -> routeIs('user') ? 'btn-primary' : 'btn-outline-primary'}}">Pengguna</a>
-                        <a href="{{route('produk')}}" wire:navigate class="btn {{ request() -> routeIs('produk') ? 'btn-primary' : 'btn-outline-primary'}}">Produk</a>
-                        <a href="{{route('transaksi')}}" wire:navigate class="btn {{ request() -> routeIs('transaksi') ? 'btn-primary' : 'btn-outline-primary'}}">Transaksi</a>
-                        <a href="{{route('laporan')}}" wire:navigate class="btn {{ request() -> routeIs('laporan') ? 'btn-primary' : 'btn-outline-primary'}}">Laporan</a>
+                        <a href="{{ route('home') }}" wire:navigate
+                            class="btn {{ request()->routeIs('home') ? 'btn-primary' : 'btn-outline-primary' }}">
+                            Beranda
+                        </a>
+                        {{-- @if (Auth::user()->peran == 'admin') --}}
+                            <a href="{{ route('user') }}" wire:navigate
+                                class="btn {{ request()->routeIs('user') ? 'btn-primary' : 'btn-outline-primary' }}">
+                                Pengguna
+                            </a>
+                        {{-- @endif --}}
+                        {{-- @if (Auth::user()->peran == 'admin') --}}
+
+                            <a href="{{ route('produk') }}" wire:navigate
+                                class="btn {{ request()->routeIs('produk') ? 'btn-primary' : 'btn-outline-primary' }}">
+                                Produk
+                            </a>
+                        {{-- @endif --}}
+                            <a href="{{ route('transaksi') }}" wire:navigate
+                                class="btn {{ request()->routeIs('transaksi') ? 'btn-primary' : 'btn-outline-primary' }}">
+                                Transaksi
+                            </a>
+                            <a href="{{ route('laporan') }}" wire:navigate
+                                class="btn {{ request()->routeIs('laporan') ? 'btn-primary' : 'btn-outline-primary' }}">
+                                Laporan
+                            </a>
                     </div>
                 </div>
             </div>
-            {{$slot}}
+            {{ $slot }}
         </main>
     </div>
 </body>
